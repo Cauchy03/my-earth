@@ -9,7 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ant-design/icons-vue": "^7.0.1",
+    "ant-design-vue": "^4.1.1",
     "cesium": "^1.113.0",
+    "sass": "^1.69.7",
     "vue": "^3.3.11"
   },
   "devDependencies": {
