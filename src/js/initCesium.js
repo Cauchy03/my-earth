@@ -144,19 +144,45 @@ const buildViewer = () => {
         // selectionIndicator: false, // Cesium 关闭点击绿色框
         // 高德影像地形地图：
         // imageryProvider: new Cesium.UrlTemplateImageryProvider({
-        //     url: "https://webst02.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}",
-        // })
+        //     url: "http://webrd02.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}",
+        //     minimumLevel: 4,
+        //     maximumLevel: 18
+        // }),
+        vrButton: true
     });
 
     // 高德影像注记地图
-    viewer.imageryLayers.addImageryProvider(
-        new Cesium.UrlTemplateImageryProvider({
-            url: "http://webst02.is.autonavi.com/appmaptile?x={x}&y={y}&z={z}&lang=zh_cn&size=1&scale=1&style=8",
-            maximumLevel: 18,
-            minimumLevel: 1,
-            credit: 'Amap'
-        })
-    )
+    // viewer.imageryLayers.addImageryProvider(
+    //     new Cesium.UrlTemplateImageryProvider({
+    //         url: "http://webst02.is.autonavi.com/appmaptile?x={x}&y={y}&z={z}&lang=zh_cn&size=1&scale=1&style=8",
+    //         maximumLevel: 18,
+    //         minimumLevel: 1,
+    //         credit: 'Amap'
+    //     })
+    // )
+    //1.Cesium加载高德矢量地图
+    var layer = new Cesium.UrlTemplateImageryProvider({
+        url: "http://webrd02.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}",
+        minimumLevel: 4,
+        maximumLevel: 18
+    })
+    viewer.imageryLayers.addImageryProvider(layer);
+
+//2.Cesium加载高德影像
+    var imgLayer = new Cesium.UrlTemplateImageryProvider({
+        url: "https://webst02.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}",
+        minimumLevel: 3,
+        maximumLevel: 18
+    })
+    viewer.imageryLayers.addImageryProvider(imgLayer);
+
+//3.Cesium加载注记要素
+    var annLayer = new Cesium.UrlTemplateImageryProvider({
+        url: "http://webst02.is.autonavi.com/appmaptile?x={x}&y={y}&z={z}&lang=zh_cn&size=1&scale=1&style=8",
+        minimumLevel: 3,
+        maximumLevel: 18
+    })
+    viewer.imageryLayers.addImageryProvider(annLayer);
 
     // 设置初始位置 Cesium.Cartesian3.fromDegrees(longitude, latitude, height, ellipsoid)
     const boundingSphere = new Cesium.BoundingSphere(
